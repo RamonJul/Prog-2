@@ -13,17 +13,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    category: {
+    location: {
       type: DataTypes.STRING,
       allowNull: false
-    },
+    }, // states in which specific genre this comment will be in
     ifComment: {
       type: DataTypes.BOOLEAN,
       allowNull: false
-    },
-    parentId: {
-      type: DataTypes.INTEGER
-    }
+    }, // diffrentiates if this is a comment or a post
+    parentId: DataTypes.INTEGER,
+    //parent id of where this comment will be
+    postedAt: Datayprs.DATE
   });
   return Comments;
 };
