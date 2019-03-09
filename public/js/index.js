@@ -18,7 +18,7 @@ var API = {
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/comments",
       type: "GET"
     });
   },
@@ -33,15 +33,17 @@ var API = {
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
   API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+    console.log(data);
+    var $comments = $.makeArray(data);
+    var $comments = $comments.map(function(comment, i) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(comment[i].dataValues.post)
+        .attr("href", "/example/" + comment[i].dataValues.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": comment[i].dataValues.id
         })
         .append($a);
 
@@ -54,8 +56,8 @@ var refreshExamples = function() {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $commentList.empty();
+    $commentList.append($comments);
   });
 };
 

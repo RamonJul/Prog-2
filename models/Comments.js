@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     location: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }, // states in which specific genre this comment will be in
     ifComment: {
       type: DataTypes.BOOLEAN,
@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     }, // diffrentiates if this is a comment or a post
     parentId: DataTypes.INTEGER,
     //parent id of where this comment will be
-    postedAt: Datayprs.DATE
+    postedAt: DataTypes.DATE
   });
   return Comments;
 };
