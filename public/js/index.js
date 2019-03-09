@@ -19,21 +19,27 @@ function get() {
   var query = "";
   switch (task) {
     case "authors":
-      query = "";
+      var id = "";
+      query = "/api/authors/" + id;
       getcall(query);
       break;
 
     case "locations":
-      query = "";
+      //find all of the posts under a category
+      var category = "";
+      query = "/api/categories/" + category;
       getcall(query);
       break;
 
     case "post":
-      query = "";
+      //find all the comments under a post
+      var postid = "";
+      query = "/api/post/" + postid;
       getcall(query);
       break;
   }
 }
+
 function post() {
   var query = "";
   var obj = {
@@ -49,11 +55,22 @@ function post() {
       obj[parentId] = "";
       postcall(query, obj);
       break;
-
     case "post":
       query = "";
       obj[ifComment] = false;
       postcall(query, obj);
+      break;
+    case "user":
+      query = "";
+      var author = {
+        name: "",
+        email: "",
+        email: "",
+        profulepic: "",
+        password: "",
+        userName: ""
+      };
+      postcall(query, author);
       break;
   }
 }
