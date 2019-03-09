@@ -3,24 +3,29 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    db.Comments.findAll({
+      where: {
+        ifComment: false
+      }
+    }).then(function(dbComments) {
       res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
+        msg: "Welcome to Red@!",
+        comments: dbComments
       });
     });
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({
+  app.get("/authors/:id", function(req, res) {
+    db.Authors.findOne({
       where: {
         id: req.params.id
       }
-    }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
+    }).then(function(dbAuthor) {
+      res.render("author", {
+        author: dbAuthor
       });
+      console.log(dbAuthor.dataValues);
     });
   });
 
