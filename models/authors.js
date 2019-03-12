@@ -5,10 +5,6 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
       primaryKey: true
     },
-    text: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -17,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    profilepic: DataTypes.STRING,
     password: {
       type: DataTypes.STRING,
       allowNull: false
