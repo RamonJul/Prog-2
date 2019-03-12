@@ -21,9 +21,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false
     }, // diffrentiates if this is a comment or a post
-    parentId: DataTypes.INTEGER,
+    postId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    parentId: DataTypes.INTEGER
     //parent id of where this comment will be
-    postedAt: DataTypes.DATE
   });
   return Comments;
 };
