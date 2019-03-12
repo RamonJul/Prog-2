@@ -29,7 +29,7 @@ module.exports = function(app) {
   });
 
   // Create a new author
-  app.post("/api/authors", function(req, res) {
+  app.post("/api/authors", function(req) {
     var newUser = {
       name: req.body.name,
       email: req.body.email,
