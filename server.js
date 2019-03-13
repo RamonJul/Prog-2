@@ -32,6 +32,8 @@ if (process.env.NODE_ENV === "test") {
   syncOptions.force = true;
 }
 
+app.use(express.static(process.cwd() + "/public/styles"));
+
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {

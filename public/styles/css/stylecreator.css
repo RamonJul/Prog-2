@@ -1,0 +1,45 @@
+    .test{
+    text-align: center;
+    background-image: url(../img/logored.png)!important;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-style: solid;
+    border-width: 2px;
+    border-color:black; 
+    }
+    
+    #home{
+    background-image: url(../img/background.jpg)!important;
+    text-align: center;  
+    }
+
+    .content{
+    color: white;
+    }
+
+    .profile{
+    color: black
+    }
+    
+    
+    #creator{
+    color: white;
+    background-color: green;
+    margin: 0px 0px 0px 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color:black;
+    }
+    
+    #forums{
+    color: white;
+    background-color: green;
+    margin: 0px 10px 0px 0px;
+    border-style: solid;
+    border-width: 2px;
+    border-color:black;
+    }
+
+    
+   
+    
