@@ -1,7 +1,6 @@
-function getcall(query, obj) {
+function getcall(query) {
   $.ajax(query, {
-    type: "GET",
-    data: obj
+    type: "GET"
   }).then(function() {
     //do something
   });
@@ -23,11 +22,7 @@ function get() {
     case "authors":
       var id = this.getAttribute("data-id");
       query = "/authors/" + id;
-      var obj = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value
-      };
-      getcall(query, obj);
+      getcall(query);
       break;
 
     case "locations":
@@ -69,7 +64,7 @@ function post() {
       postcall(query, obj);
       break;
     case "user":
-      query = "";
+      query = "/api/authors";
       var author = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
