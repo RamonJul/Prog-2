@@ -4,41 +4,74 @@
         {{!--post--}}
         <div class="jumbotron jumbotron-fluid test">
             <div class="container">
-                <h1 class="display-4">{{category}}</h1>
+                <h1 class="display-4">{{title}}</h1>
+                <p>{{author}}</p>
                 <br><br><br><br><br><br><br><br>
-                <a class="btn post" data-task="post">Learn more</a>
+                <p id="post_post_page">{{post}}</p>
+                <button class="reply" data-toggle="modal" data-target="#replymodal">reply</button>
             </div>
 
         </div>
     </div>
 
-    {{!--comments --}}
-    {{!-- add hover effect to make it look clickable --}}
-    <div class="row" id="comemnts">
-        <div class="col-md-12">
-            {{#each}}
-            <div class="card get" data-post-id={{id}} data-task="post">
-                <div class="card-header">
-                    {{title}}
-                </div>
-                <div class="card story">
-                    <p>{{post}}</p>
-                    <div class="card-img-overlay">
-                        <h5 class="card-title"></h5>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{author}}</p>
-                </div>
-            </div>
-            {{/each}}
-
-        </div>
-
-    </div>
-
+{{!-- if their are comments --}}
+    {{#if comments}}
+    {{#each comments}}
+    {{> commentlist}}
+    {{/each}}
+    {{/if}}
 </div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src=""></script>
+
+<div class="modal" id="replymodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reply</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="text" id="text" placeholder="reply">
+                    <input type="text" id="author" placeholder="reply">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary post" id="makereply" data-location="" data-postId=""
+                    data-parentId="">Comment</button>
+            </div>
+        </div>
+    </div>
+</div>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="styles/css/stylememe.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="styles/css/styleindex.css" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="/js/index.js"></script>
+
+<script>
+    var reply = document.getElementsByClassName("reply")
+    for (var i = 0; i < reply.length; i++) {
+
+        reply[i].addEventListener("click", function () {
+            let parentid = this.getAttribute("data-parentId")
+            let postid = this.getAttribute("data-postId")
+            let location = this.getAttribute("data-location")
+
+            var confirm=document.getElementById("makereply")
+            confirm.setAttribute("data-parentId",parentid)
+             confirm.setAttribute("data-postId",postid)
+              confirm.setAttribute("data-location",location)
+        })
+    }
+
+
+</script>
