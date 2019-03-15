@@ -1,0 +1,73 @@
+<div class="conatainer">
+    <div class="row">
+        <div class="col-10 offset-1"></div>
+        {{!-- category name --}}
+        <div class="jumbotron jumbotron-fluid test">
+            <div class="container">
+                <h1 class="display-4">{{category}}</h1>
+                <br><br><br><br><br><br><br><br>
+                <a class="btn post" data-task="post">Learn more</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    {{!-- make a post --}}
+    <div class="card text-center">
+        <div class="card-header">
+            <h1>Game Talk</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Gamers Rise Up</h5>
+            <h2>Create a Post</h2>
+
+            <form class="create-form">
+
+                <div class="form-group">
+                    <label for="auth">Author:</label>
+                    <input type="text" id="author" name="author">
+                </div>
+
+                <div class="form-group story">
+                    <label for="exampleFormControlTextarea1 Title">Title Post</label>
+                    <textarea class="form-control" id="title" rows="1"></textarea>
+                </div>
+
+                <div class="form-group story">
+                    <label for="exampleFormControlTextarea1 Story">Game Talk</label>
+                    <textarea class="form-control" id="text" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="post" data-task="post">Post</button>
+            </form>
+        </div>
+    </div><br>
+
+
+    {{!-- posts --}}
+    {{!-- add hover effect to make it look clickable --}}
+    <div class="row" id="Posts">
+        <div class="col-md-12">
+            {{#each}}
+            <div class="card get" data-post-id={{id}} data-task="post">
+                <div class="card-header">
+                    {{title}}
+                </div>
+                <div class="card story">
+                    <p>{{post}}</p>
+                    <div class="card-img-overlay">
+                        <h5 class="card-title"></h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{author}}</p>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+
+    </div>
+
+</div>

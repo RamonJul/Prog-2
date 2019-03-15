@@ -1,6 +1,7 @@
-function getcall(query) {
+function getcall(query, obj) {
   $.ajax(query, {
-    type: "GET"
+    type: "GET",
+    data: obj
   }).then(function() {
     //do something
   });
@@ -16,64 +17,77 @@ function postcall(query, obj) {
 }
 
 function get() {
+  var task = this.getAttribute("data-task");
   var query = "";
   switch (task) {
     case "authors":
-      var id = "";
-      query = "/api/authors/" + id;
-      getcall(query);
+      var id = this.getAttribute("data-id");
+      query = "/authors/" + id;
+      var obj = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+      };
+      getcall(query, obj);
       break;
 
     case "locations":
       //find all of the posts under a category
-      var category = "";
-      query = "/api/categories/" + category;
+      var category = this.getAttribute("data-category");
+      query = "/category/" + category;
       getcall(query);
       break;
 
     case "post":
       //find all the comments under a post
-      var postid = "";
-      query = "/api/post/" + postid;
+      var postid = this.getAttribute("data-post-id");
+      query = "/post/" + postid;
       getcall(query);
       break;
   }
 }
 
 function post() {
+  var task = this.getAttribute("data-task");
   var query = "";
   var obj = {
-    post: "",
-    author: "",
+    post: document.getElementById("text").value,
+    author: document.getElementById("author").value,
     location: ""
   };
   switch (task) {
     case "comment":
-      query = "";
+      query = "/api/comment";
       obj[ifComment] = true;
       obj[postId] = "";
       obj[parentId] = "";
       postcall(query, obj);
       break;
     case "post":
-      query = "";
+      query = "/api/comment";
+      obj[title] = document.getElementById("title").value;
       obj[ifComment] = false;
       postcall(query, obj);
       break;
     case "user":
       query = "";
       var author = {
-        name: "",
-        email: "",
-        email: "",
-        profulepic: "",
-        password: "",
-        userName: ""
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        profilePic: document.getElementById("Pic").value,
+        password: document.getElementById("password").value,
+        userName: document.getElementById("userName").value
       };
       postcall(query, author);
       break;
   }
 }
-document.getElementById("btn").addEventListener("click", get);
+var getButton = document.getElementsByClassName("get");
+for (var i = 0; i < getButton.length; i++) {
+  getButton[i].addEventListener("click", get);
+}
 
-document.getElementById("btn_2").addEventListener("click", post);
+var postButton = document.getElementsByClassName("post");
+
+for (var j = 0; j < posttButton.length; j++) {
+  postButton[j].addEventListener("click", post);
+}

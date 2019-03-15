@@ -31,7 +31,6 @@ router.get("/category/:category", function(req, res) {
       location: req.params.category
     }
   }).then(function(dbComments) {
-    console.log(dbComments[0]);
     res.render(dbComments[0].dataValues.location, dbComments);
   });
 });
