@@ -43,39 +43,31 @@ router.get("/post/:id", function(req, res) {
       id: req.params.id
     }
   }).then(function(dbComment) {
-    var commentObj = {
-      post: dbComment.dataValues.post,
-      author: dbComment.dataValues.author,
-      comments: []
-    };
     db.Comments.findAll({
       where: {
         postId: dbComment.dataValues.id
       }
     }).then(function(results) {
-      console.log(results);
-      res.send(200);
-      var tempArray = [];
-      for (var i = 0; i < results.length; i++) {
-        tempArray.push(results[i].dataValues);
-        tempArray[i].children = [];
-        if (tempArray[i].parentId === null) {
-          tempArray[i].parentId = 0;
-        }
-      }
-      tempArray.sort(function(a, b) {
-        return a.parentId - b.parentId;
+      var filteredArray = results.map(function(result) {
+        return result.dataValues;
       });
-      for (var i = tempArray.length - 1; i >= 0; i--) {
+      filteredArray.sort(function(a, b) {
+        return (a.parentId || 0) - (b.parentId || 0);
+      });
+      filteredArray.forEach(function(comment) {
+        comment.children = [];
+      });
+      for (var i = filteredArray.length - 1; i >= 0; i--) {
         for (var j = i - 1; j >= 0; j--) {
-          if (tempArray[j].id === tempArray[i].parentId) {
-            tempArray[j].children.push(tempArray[i]);
-            tempArray.splice(i, 1);
+          if (filteredArray[j].id === filteredArray[i].parentId) {
+            filteredArray[j].children.push(filteredArray[i]);
+            filteredArray.splice(i, 1);
             break;
           }
         }
       }
-      commentObj.comments = tempArray;
+      // console.log(commentObj);
+      res.render("post", { post: filteredArray });
     });
   });
 });
