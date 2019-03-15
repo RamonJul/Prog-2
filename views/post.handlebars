@@ -38,7 +38,7 @@
                     <textarea class="form-control" id="text" rows="3"></textarea>
                 </div>
 
-                <button type="submit" class="post" data-task="post">Post</button>
+                <button type="submit" class="post" data-task="post" data-location={{category}}>Post</button>
             </form>
         </div>
     </div><br>
@@ -46,10 +46,10 @@
 
     {{!-- posts --}}
     {{!-- add hover effect to make it look clickable --}}
-    <div class="row" id="Posts">
+    <div class="row" id="PostsList">
         <div class="col-md-12">
-            {{#each}}
-            <div class="card get" data-post-id={{id}} data-task="post">
+            {{#each posts}}
+            <div class="card get posts" data-post-id={{id}} data-task="post">
                 <div class="card-header">
                     {{title}}
                 </div>

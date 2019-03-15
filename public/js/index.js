@@ -1,6 +1,7 @@
-function getcall(query) {
+function getcall(query, obj) {
   $.ajax(query, {
-    type: "GET"
+    type: "GET",
+    data: obj
   }).then(function() {
     //do something
   });
@@ -38,6 +39,15 @@ function get() {
       query = "/post/" + postid;
       getcall(query);
       break;
+
+    case "login":
+      var accountInfo = {
+        email: document.getElementById("logemail").value,
+        password: document.getElementById("logpassword").value
+      };
+      query = "/login";
+      getcall(query, accountInfo);
+      break;
   }
 }
 
@@ -47,7 +57,7 @@ function post() {
   var obj = {
     post: document.getElementById("text").value,
     author: document.getElementById("author").value,
-    location: ""
+    location: this.getAttribute("data-location").value
   };
   switch (task) {
     case "comment":
@@ -68,7 +78,7 @@ function post() {
       var author = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
-        profilePic: document.getElementById("Pic").value,
+        profilePic: document.getElementById("pic").value,
         password: document.getElementById("password").value,
         userName: document.getElementById("userName").value
       };
@@ -77,12 +87,14 @@ function post() {
   }
 }
 var getButton = document.getElementsByClassName("get");
-for (var i = 0; i < getButton.length; i++) {
-  getButton[i].addEventListener("click", get);
+if (getButton !== 0) {
+  for (var i = 0; i < getButton.length; i++) {
+    getButton[i].addEventListener("click", get);
+  }
 }
-
 var postButton = document.getElementsByClassName("post");
-
-for (var j = 0; j < posttButton.length; j++) {
-  postButton[j].addEventListener("click", post);
+if (postButton.length !== 0) {
+  for (var j = 0; j < postButton.length; j++) {
+    postButton[j].addEventListener("click", post);
+  }
 }

@@ -6,7 +6,10 @@ var router = express.Router();
 // Load index page
 router.get("/", function(req, res) {
   db.categories.findAll({}).then(function(dbCategories) {
-    res.render("index", dbCategories);
+    var categoryObj = {
+      categoryList: dbCategories
+    };
+    res.render("index", categoryObj);
   });
 });
 
@@ -20,7 +23,6 @@ router.get("/authors/:id", function(req, res) {
     res.render("author", {
       author: dbAuthor
     });
-    console.log(dbAuthor.dataValues);
   });
 });
 
@@ -28,10 +30,15 @@ router.get("/authors/:id", function(req, res) {
 router.get("/category/:category", function(req, res) {
   db.Comments.findAll({
     where: {
-      location: req.params.category
+      location: req.params.category,
+      ifComment: false
     }
   }).then(function(dbComments) {
-    res.render(dbComments[0].dataValues.location, dbComments);
+    var postList = {
+      category: dbComments[0].dataValues.location,
+      posts: dbComments
+    };
+    res.render("post", postList);
   });
 });
 
@@ -66,7 +73,7 @@ router.get("/post/:id", function(req, res) {
         }
       }
       // console.log(commentObj);
-      res.render("post", { post: filteredArray });
+      res.render("comments", { post: filteredArray });
     });
   });
 });
