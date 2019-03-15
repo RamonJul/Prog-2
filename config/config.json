@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "It7n3x04",
     "database": "chat_db",
     "host": "localhost",
     "port": 3306,

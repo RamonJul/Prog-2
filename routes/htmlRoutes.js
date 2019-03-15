@@ -1,36 +1,86 @@
 var db = require("../models");
 
-module.exports = function(app) {
-  // Load index page
-  app.get("/", function(req, res) {
+var express = require("express");
+var router = express.Router();
+
+// Load index page
+router.get("/", function(req, res) {
+  db.categories.findAll({}).then(function(dbCategories) {
+    res.render("index", dbCategories);
+  });
+});
+
+// Load author page by id
+router.get("/authors/:id", function(req, res) {
+  db.Authors.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(dbAuthor) {
+    res.render("author", {
+      author: dbAuthor
+    });
+    console.log(dbAuthor.dataValues);
+  });
+});
+
+// Load all the posts for a subRed@
+router.get("/category/:category", function(req, res) {
+  db.Comments.findAll({
+    where: {
+      location: req.params.category
+    }
+  }).then(function(dbComments) {
+    console.log(dbComments[0]);
+    res.render(dbComments[0].dataValues.location, dbComments);
+  });
+});
+
+// Load a post and its comments
+router.get("/post/:id", function(req, res) {
+  db.Comments.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(dbComment) {
+    var commentObj = {
+      post: dbComment.dataValues.post,
+      author: dbComment.dataValues.author,
+      comments: []
+    };
     db.Comments.findAll({
       where: {
-        ifComment: false
+        postId: dbComment.dataValues.id
       }
-    }).then(function(dbComments) {
-      res.render("index", {
-        msg: "Welcome to Red@!",
-        comments: dbComments
+    }).then(function(results) {
+      console.log(results);
+      res.send(200);
+      var tempArray = [];
+      for (i = 0; i < results.length; i++) {
+        tempArray.push(results[i].dataValues);
+        tempArray[i].children = [];
+        if (tempArray[i].parentId === null) {
+          tempArray[i].parentId = 0;
+        }
+      }
+      tempArray.sort(function(a, b) {
+        return a.parentId - b.parentId;
       });
+      for (i = tempArray.length - 1; i >= 0; i--) {
+        for (j = i - 1; j >= 0; j--) {
+          if (tempArray[j].id === tempArray[i].parentId) {
+            tempArray[j].children.push(tempArray[i]);
+            tempArray.pop();
+            break;
+          }
+        }
+      }
     });
   });
+});
+// Render 404 page for any unmatched routes
+router.get("*", function(req, res) {
+  res.render("404");
+});
 
-  // Load example page and pass in an example by id
-  app.get("/authors/:id", function(req, res) {
-    db.Authors.findOne({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbAuthor) {
-      res.render("author", {
-        author: dbAuthor
-      });
-      console.log(dbAuthor.dataValues);
-    });
-  });
-
-  // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
-  });
-};
+module.exports = router;
