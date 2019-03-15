@@ -43,10 +43,10 @@
 
               <div class="card text-center">
                     <div class="card-header">
-                      <h1>Memes</h1>
+                      <h1>Stories</h1>
                     </div>
                     <div class="card-body">
-                      <h5 class="card-title">Welcome To the Meme Post Thread</h5>
+                      <h5 class="card-title">Welcome To Story Time</h5>
                       <h2>Create a Post</h2>
 
                     <form class="create-form">
@@ -56,34 +56,37 @@
                             <input type="text" id="auth" name="author">
                         </div>
 
-                        <div class="form-group">
-                            <label for="image">Image Link:</label>
-                            <textarea id="image" name="image" rows="1" cols="40"></textarea>
+                        <div class="form-group story">
+                          <label for="exampleFormControlTextarea1 Title">Title</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
                         </div>
 
-                        <button type="submit">Post</button>
+                        <div class="form-group story">
+                          <label for="exampleFormControlTextarea1 Story">Story Here</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="Post">Post</button>
                     </form>
                   </div>
                 </div><br>
-
 
                 <div id="Posts">
 
                 <div class="card text-center">
                   <div class="card-header">
-                    
+                    Masked Man
                   </div>
-                  <div class="card bg-dark text-white">
-                    <img class="card-img" src="/styles/img/meme.png" alt="Card image">
+                  <div class="card story">
+                    <p>The masked man put it simply: "I'm going to kill you in five minutes," and since James had heard him say the exact same line to three of his friends--and noted with some alarm that the man had carried through on each occasion--he knew exactly what lay in store for him. He was tied down with barbwire to a rough sawed plank, but comfort mattered little now. After all, the last thing he wanted to do with his last five minutes was think about how uncomfortable he was on that stupid board. You'd think, though, that someone would've at least sanded it down a bit. And why barbwire? Was that really necessary? Why couldn't he have been killed by a killer who preferred soft nylon rope? And why, for that matter, had he been positioned facing the wall, with nothing interesting to look at? He was the only one of his friends who'd been put this way. Nothing to see but cheap woodgrain paneling. It was maddening. What an insult! And, to make matters worse, he had to pee. He didn't mind not getting a "last cigarette." He didn't smoke. But he did have to pee. Jesus Christ, what a lousy way to spend five minutes.</p>
                     <div class="card-img-overlay">
                       <h5 class="card-title"></h5>
                     </div>
                   </div>
                   <div class="card-footer text-muted">
+    
                     <div class="card col-4 offset-4 profile" style="width: 18rem;">
-
-                      <img class="card-img-top" src="/styles/img/guy.jpg" alt="Card image cap">
-
+                      <img class="card-img-top" src="guy.jpg" alt="Card image cap">
                     <div class="card-body">
                       <p class="card-text">Jeff Kurtz</p>
                     </div>
@@ -91,7 +94,7 @@
                   </div><br>
 
                   <p>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary Comments" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                       Comment
                     </button>
                   </p>
@@ -99,18 +102,18 @@
                     <div class="card card-body">
                         <form class="create-form">
 
-                            <div class="form-group">
-                                <label for="auth">Author:</label>
-                                <input type="text" id="auth" name="author">
-                            </div>
-          
-                            <div class="form-group story">
-                              <label for="exampleFormControlTextarea1 Story">Text</label>
-                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-          
-                            <button type="submit" class="Post">Post</button>
-                          </form>
+                        <div class="form-group">
+                            <label for="auth">Author:</label>
+                            <input type="text" id="auth" name="author">
+                        </div>
+      
+                        <div class="form-group story">
+                          <label for="exampleFormControlTextarea1 Story">Text</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+      
+                        <button type="submit" class="Post">Post</button>
+                        </form>
                     </div>
                   </div>
 
@@ -127,15 +130,13 @@
 
                    
                 </div>
-            </div>   
+                 
 
               
-              
-      
-              <div class="content"><!--Content Start-->
-      
-      
-              </div><!--Content End-->
+              </div>
+
+  
+            
       
             </div>
           </div>
