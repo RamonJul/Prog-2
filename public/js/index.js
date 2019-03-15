@@ -16,24 +16,25 @@ function postcall(query, obj) {
 }
 
 function get() {
+  var task = this.getAttribute("data-task");
   var query = "";
   switch (task) {
     case "authors":
-      var id = "";
+      var id = this.getAttribute("data-id");
       query = "/api/authors/" + id;
       getcall(query);
       break;
 
     case "locations":
       //find all of the posts under a category
-      var category = "";
+      var category = this.getAttribute("data-category");
       query = "/api/categories/" + category;
       getcall(query);
       break;
 
     case "post":
       //find all the comments under a post
-      var postid = "";
+      var postid = this.getAttribute("data-post-id");
       query = "/api/post/" + postid;
       getcall(query);
       break;
@@ -41,10 +42,11 @@ function get() {
 }
 
 function post() {
+  var task = this.getAttribute("data-task");
   var query = "";
   var obj = {
-    post: "",
-    author: "",
+    post: document.getElementById("text").value,
+    author: document.getElementById("author").value,
     location: ""
   };
   switch (task) {
@@ -63,17 +65,23 @@ function post() {
     case "user":
       query = "";
       var author = {
-        name: "",
-        email: "",
-        email: "",
-        profulepic: "",
-        password: "",
-        userName: ""
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        profilePic: document.getElementById("Pic").value,
+        password: document.getElementById("password").value,
+        userName: document.getElementById("userName").value
       };
       postcall(query, author);
       break;
   }
 }
-document.getElementById("btn").addEventListener("click", get);
+var getButton = document.getElementsByClassName("btn");
+for (var i = 0; i < getButton.length; i++) {
+  getButton[i].addEventListener("click", get);
+}
 
-document.getElementById("btn_2").addEventListener("click", post);
+var postButton = document.getElementsByClassName("btn_2");
+
+for (var j = 0; j < posttButton.length; j++) {
+  postButton[j].addEventListener("click", post);
+}
