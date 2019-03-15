@@ -21,8 +21,8 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-const apiRoutes = require("./routes/apiRoutes");
-const htmlRoutes = require("./routes/htmlRoutes");
+var apiRoutes = require("./routes/apiRoutes");
+var htmlRoutes = require("./routes/htmlRoutes");
 
 app.use(apiRoutes);
 app.use(htmlRoutes);
