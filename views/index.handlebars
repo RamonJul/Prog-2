@@ -15,9 +15,11 @@
         <button id="creator" class="btn btn-primary float-left">Make a Creator</button>
         <button id="forums" class="btn btn-primary float-right">Already Have a Creator</button>
 
-        <div class="content"><!--Content Start-->
- 
-          
+        <div class="content"><!--Content Start-->  
+        {{#each }}
+        <button class="get categories btn" data-task="locations" data-category={{id}}>{{categories}}</button>
+        {{/each}}
+
 
         </div><!--Content End-->
 
