@@ -56,7 +56,7 @@ router.get("/post/:id", function(req, res) {
       console.log(results);
       res.send(200);
       var tempArray = [];
-      for (i = 0; i < results.length; i++) {
+      for (var i = 0; i < results.length; i++) {
         tempArray.push(results[i].dataValues);
         tempArray[i].children = [];
         if (tempArray[i].parentId === null) {
@@ -66,15 +66,16 @@ router.get("/post/:id", function(req, res) {
       tempArray.sort(function(a, b) {
         return a.parentId - b.parentId;
       });
-      for (i = tempArray.length - 1; i >= 0; i--) {
-        for (j = i - 1; j >= 0; j--) {
+      for (var i = tempArray.length - 1; i >= 0; i--) {
+        for (var j = i - 1; j >= 0; j--) {
           if (tempArray[j].id === tempArray[i].parentId) {
             tempArray[j].children.push(tempArray[i]);
-            tempArray.pop();
+            tempArray.splice(i, 1);
             break;
           }
         }
       }
+      commentObj.comments = tempArray;
     });
   });
 });
