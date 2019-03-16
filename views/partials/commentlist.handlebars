@@ -6,8 +6,8 @@
          <button class="reply" data-toggle="modal" data-target="#replymodal" data-parentId={{id}} data-postId={{postId}} data-location={{location}}>reply</button>
         </div>
         {{!-- calls itsef  --}}
-        {{#if comments}}
-            {{#each comments}}
+        {{#if children}}
+            {{#each children}}
             {{> commentlist}}
             {{/each}}
             {{/if}}
