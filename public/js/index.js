@@ -1,19 +1,12 @@
 window.onload = function() {
-  function getcall(query, obj) {
-    $.ajax(query, {
-      type: "GET",
-      data: obj
-    }).then(function() {
-      location.reload();
-    });
+  function getcall(query) {
+    window.location.replace(query);
   }
 
   function postcall(query, obj) {
     $.ajax(query, {
       type: "POST",
       data: obj
-    }).then(function() {
-      location.reload();
     });
   }
 
