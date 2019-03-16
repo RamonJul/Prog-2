@@ -73,8 +73,8 @@ router.get("/post/:id", function(req, res) {
         }
       }
       // console.log(commentObj);
-      // res.render("comments", filteredArray[0]);
-      res.json(filteredArray);
+      res.render("comments", filteredArray[0]);
+      // res.json(filteredArray);
     });
   });
 });
